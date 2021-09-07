@@ -11,8 +11,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     User.create({
         _id: new mongoose.Types.ObjectId,
-        FullName:'Eden Sella',
-        Username:'edens',
+        FullName:'itay nadler',
+        Username:'itay',
         Password:'Aa1212',
         Id_Number:'325478541'
     },function (err,person)

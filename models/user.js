@@ -7,6 +7,6 @@ const userSchema = new Schema({
     Username : String,
     Password : String,
     Id_Number : String
-},);
+});
 
 module.exports=mongoose.model('User', userSchema,'User');
