@@ -17,7 +17,8 @@ router.post('/',(req,res,next)=>
     Password: req.body.inputPassword,
     Id_Number: req.body.inputId,
     Birthday: req.body.inputBirthday,
-    Maritalstatus:req.body.inputMaritalstatus
+    Maritalstatus:req.body.inputMaritalstatus,
+    Revision:1
   });
   user.save().then(result => {
     console.log(result);

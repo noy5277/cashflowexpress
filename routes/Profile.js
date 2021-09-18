@@ -1,27 +1,26 @@
 var express = require('express');
 var router = express.Router();
 const User=require('../models/user');
+const Cost=require('../models/cost');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', async function (req, res, next) {
     User.findById(req.params.id)
         .exec()
         .then(doc => {
-            var user=doc.toObject();
-            console.log(user.FullName);
-            if(doc)
+            let user = doc.toObject();
+            if (doc)
                 res.render('profile',{
-                    Fullname:user.FullName,
-                    link:'/profile/'+doc._id
-
+                   Fullname:user.FullName,
+                   link:"/profile/"+user._id
                 });
             else
                 res.status(200).json({
-                    message:"Cant find user id"
+                    message: "Cant find user id"
                 });
         })
         .catch(err => {
@@ -29,5 +28,4 @@ router.get('/:id', function(req, res, next) {
             res.status(500).json({error: err})
         });
 });
-
 module.exports = router;
