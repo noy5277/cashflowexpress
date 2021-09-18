@@ -9,16 +9,22 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    User.create({
-        _id: new mongoose.Types.ObjectId,
-        FullName:'itay nadler',
-        Username:'itay',
-        Password:'Aa1212',
-        Id_Number:'325478541'
-    },function (err,person)
-    {
-        if (err) console.log(err);
-    }
-);
+    User.findOne({Username:req.body.inputUsername,Password:req.body.inputPassword})
+        .exec()
+        .then(doc => {
+            console.log(doc);
+            if (doc)
+                res.redirect('/profile/'+doc._id);
+            else
+                res.status(200).json({
+                    message:"Username or Password is incorrect",
+                    user:req.body.inputUsername,
+                    password:req.body.inputPassword
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
 });
 module.exports = router;

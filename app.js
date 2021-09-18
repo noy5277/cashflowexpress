@@ -3,22 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://admin:'+ 'Aa1234567' +'@cluster0.pxmh7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
-var db = mongoose.connection;
-console.log('connect to database...');
 
+
+var mongoDB = 'mongodb+srv://admin:Aa1234567@cluster0.pxmh7.mongodb.net/CashFlow?retryWrites=true&w=majority';
+mongoose.connect(mongoDB);
+
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var loginRouter = require('./routes/login');
+var mainRouter = require('./routes/index');
+var signupRouter = require('./routes/users');
+var profileRouter= require('./routes/Profile');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,6 +31,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', loginRouter);
+app.use('/signup',signupRouter);
+app.use('/Profile',profileRouter);
 
 
 // catch 404 and forward to error handler
