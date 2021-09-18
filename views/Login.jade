@@ -29,10 +29,10 @@ html( lang="en" )
                                 label(for='inputPassword') Password:
                                 input#inputPassword.form-control(type='text' placeholder='Enter Password' name='inputPassword')
                             br
-                            button.btn.btn-primary(type='submit') Submit
-                            br
-                            br
-                            a(style='color:navy;font-size:20px;',href='/signup') Sign-up
+                            +button("primary", "/signup", "medium") Sign-up
+                            .col-md-5
+                                button.btn.btn-primary(type='submit') Submit
+
 
 
 

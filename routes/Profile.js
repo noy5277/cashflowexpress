@@ -14,7 +14,11 @@ router.get('/:id', function(req, res, next) {
             var user=doc.toObject();
             console.log(user.FullName);
             if(doc)
-                res.render('profile',{Fullname:user.FullName});
+                res.render('profile',{
+                    Fullname:user.FullName,
+                    link:'/profile/'+doc._id
+
+                });
             else
                 res.status(200).json({
                     message:"Cant find user id"
