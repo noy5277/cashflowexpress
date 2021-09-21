@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const User=require('../models/user');
 const UserChanges= require('../models/userChanges');
-
+var mongoose = require('mongoose');
 
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
@@ -23,7 +23,7 @@ module.exports = router;
 
 function InsertToUserChanges(user) {
     const changes= new UserChanges({
-        _id:user._id,
+        _id:new mongoose.Types.ObjectId(),
         Fullname:user.Fullname,
         Username:user.Username,
         Password:user.Password,
