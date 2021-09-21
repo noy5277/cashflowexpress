@@ -19,12 +19,10 @@ html( lang="en" )
         .row
             .col-md-5.col-sm-8.col-xs-12
                 .panel.panel-primary
-                    .panel-heading Sign-up
+                    .panel-heading Change Profile Details
                     .panel-body
-                        form(method='POST' action='')
-                            div.form-group
-                                label(for='inputId') Id:
-                                input#inputId.form-control(type='text' placeholder='Enter Id' name='inputId')
+                        form(method='POST' action='#{link}')
+
                             div.form-group
                                 label(for='inputFullname') Fullname:
                                 input#inputFullname.form-control(type='text' placeholder='Enter Fullname' name='inputFullname')
@@ -35,13 +33,10 @@ html( lang="en" )
                                 label(for='inputPassword') Password:
                                 input#inputPassword.form-control(type='text' placeholder='Enter Password' name='inputPassword')
                             div.form-group
-                                label(for='inputBirthday') Birthday:
-                                input#inputBirthday.form-control(type='text' placeholder='Enter Birthday' name='inputBirthday')
-                            div.form-group
                                 label(for='inputMaritalstatus') Marital status:
                                 input#inputMaritalstatus.form-control(type='text' placeholder='Enter Marital status' name='inputMaritalstatus')
                             div.form-group
                                 label(for='inputCity') City:
                                 input#inputCity.form-control(type='text' placeholder='Enter City' name='inputCity')
                             br
-                            button.btn.btn-primary(type='submit') Submit
+                            button.btn.btn-primary(type='Update') Update

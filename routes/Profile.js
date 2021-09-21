@@ -3,21 +3,34 @@ var router = express.Router();
 const User=require('../models/user');
 const Cost=require('../models/cost');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
 
+
+router.get('/:id', function (req, res, next) {
+
+    findUserById(req.params.id, res ,user =>
+    {
+        console.log(user.Id_Number);
+        findCostById(user.Id_Number,res ,costs =>{
+            res.render('profile', {
+                Fullname:user.Fullname,
+                link:'/profile/'+user._id,
+                json: costs,
+                link2:'/edit/'+req.params.id,
+                link3:'/cost/'+req.params.id
+            });
+
+        })
+    });
 });
+module.exports = router;
 
-router.get('/:id', async function (req, res, next) {
-    User.findById(req.params.id)
+global.findUserById=function (id,res,callback)
+{
+    User.findById(id)
         .exec()
         .then(doc => {
-            let user = doc.toObject();
             if (doc)
-                res.render('profile',{
-                   Fullname:user.FullName,
-                   link:"/profile/"+user._id
-                });
+                callback(doc.toObject());
             else
                 res.status(200).json({
                     message: "Cant find user id"
@@ -27,5 +40,21 @@ router.get('/:id', async function (req, res, next) {
             console.log(err);
             res.status(500).json({error: err})
         });
-});
-module.exports = router;
+}
+
+function findCostById(id,res,callback) {
+    Cost.find({Id_Number: id})
+        .exec()
+        .then(doc => {
+            if (doc)
+                callback(doc);
+            else
+                res.status(200).json({
+                    message: "Cant find user id"
+                });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err})
+        });
+}

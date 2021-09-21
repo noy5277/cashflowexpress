@@ -9,7 +9,8 @@ const userSchema = mongoose.Schema({
     Id_Number:String,
     Birthday:Date,
     Maritalstatus:String,
-    Revision:Number
+    Revision:Number,
+    City:String
 });
 
 module.exports = mongoose.model('User',userSchema,"User");

@@ -31,22 +31,19 @@ html( lang="en" )
                         a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Settings
                             span.caret
                         ul.dropdown-menu( role="menu" )
-                            li: a( href="#" ) Edit Profile
+                            li: a( href="#{link2}" ) Edit Profile
+                            li: a( href="#{link3}" ) Import cost
+                    li.active: a( href="/") Logout
+
 
         .jumbotron
             h1 Hello, #{Fullname}
             p Lets see what your money doing today.
 
-        .list-group
-            .list-group-item( href="#" )
-                h4.list-group-item-heading #{title1}
-                p.list-group-item-text Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-        .list-group
-            .list-group-item( href="#" )
-                h4.list-group-item-heading #{title2}
-                p.list-group-item-text Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
-            .list-group-item( href="#" )
-                h4.list-group-item-heading #{title3}
-                p.list-group-item-text Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+        each val, key in json
+            .list-group
+                .list-group-item( href="#" )
+                    h4.list-group-item-heading #{key}
+                    p.list-group-item-text #{val}
 
 
