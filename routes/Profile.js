@@ -43,7 +43,10 @@ global.findUserById=function (id,res,callback)
 }
 
 function findCostById(id,res,callback) {
-    Cost.find({Id_Number: id})
+    var date=new Date();
+    var start=date.getFullYear()+'-'+date.getMonth()+'-01';
+    var end=date.getFullYear()+'-'+date.getMonth()+'-31'
+    Cost.find({Id_Number: id,Date:{ $gte: start, $lte: end }})
         .exec()
         .then(doc => {
             if (doc)
