@@ -39,6 +39,20 @@ html( lang="en" )
         .jumbotron
             h1 Hello, #{Fullname}
             p Lets see what your money doing today.
+                    br
+                    .panel.panel-primary
+                        .panel-heading Choose Date
+                        .panel-body
+                            form(method='POST' action='')
+                                div.form-group
+                                    label(for='inputMonth') Month:
+                                    input#inputMonth.form-control(type='text' placeholder='Enter Month' name='inputMonth')
+                                div.form-group
+                                    label(for='inputYear') Year:
+                                    input#inputYear.form-control(type='text' placeholder='Enter Year' name='inputYear')
+                                br
+                                .col-md-5
+                                    button.btn.btn-primary(type='submit') Submit
 
         each val, key in json
             .list-group

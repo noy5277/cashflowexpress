@@ -10,7 +10,10 @@ router.get('/:id', function (req, res, next) {
     findUserById(req.params.id, res ,user =>
     {
         console.log(user.Id_Number);
-        findCostById(user.Id_Number,res ,costs =>{
+        var date=new Date();
+        var start=date.getFullYear()+'-'+date.getMonth()+'-01';
+        var end=date.getFullYear()+'-'+date.getMonth()+'-31';
+        findCostById(user.Id_Number,res,start,end,costs =>{
             res.render('profile', {
                 Fullname:user.Fullname,
                 link:'/profile/'+user._id,
@@ -20,6 +23,23 @@ router.get('/:id', function (req, res, next) {
             });
 
         })
+    });
+});
+
+router.post('/:id', function (req, res, next) {
+    var start=req.body.inputYear+'-'+req.body.inputMonth+'-01';
+    var end=req.body.inputYear+'-'+req.body.inputMonth+'-31';
+    findUserById(req.params.id, res ,user => {
+        findCostById(user.Id_Number, res, start, end, costs => {
+            res.render('profile', {
+                Fullname: user.Fullname,
+                link: '/profile/' + user._id,
+                json: costs,
+                link2: '/edit/' + req.params.id,
+                link3: '/cost/' + req.params.id
+            });
+
+        });
     });
 });
 module.exports = router;
@@ -42,10 +62,8 @@ global.findUserById=function (id,res,callback)
         });
 }
 
-function findCostById(id,res,callback) {
-    var date=new Date();
-    var start=date.getFullYear()+'-'+date.getMonth()+'-01';
-    var end=date.getFullYear()+'-'+date.getMonth()+'-31'
+function findCostById(id,res,start,end,callback) {
+
     Cost.find({Id_Number: id,Date:{ $gte: start, $lte: end }})
         .exec()
         .then(doc => {
