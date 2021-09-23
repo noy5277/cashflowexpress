@@ -32,7 +32,7 @@ html( lang="en" )
                             span.caret
                         ul.dropdown-menu( role="menu" )
                             li: a( href="#{link2}" ) Edit Profile
-                            li: a( href="#{link3}" ) Import cost
+                            li: a( href="#{link3}" ) Add cost
                     li.active: a( href="/") Logout
 
 
@@ -54,10 +54,28 @@ html( lang="en" )
                                 .col-md-5
                                     button.btn.btn-primary(type='submit') Submit
 
-        each val, key in json
-            .list-group
-                .list-group-item( href="#" )
-                    h4.list-group-item-heading #{key}
-                    p.list-group-item-text #{val}
+        // each val, key in json
+        //     .list-group
+        //         .list-group-item( href="#" )
+        //             h4.list-group-item-heading #{key}
+        //             p.list-group-item-text #{val}
+
+        table.table.table-striped
+            thead
+                tr
+                    th Category
+                    th Description
+                    th Sum
+                    th Date
+
+
+            tbody
+            each val in json
+                tr
+                    td=  val.Category
+                    td=  val.Name
+                    td=  val.Sum
+                    td=  val.Date
+
 
 
