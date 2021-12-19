@@ -11,8 +11,8 @@ router.get('/:id', function (req, res, next) {
     {
         console.log(user.Id_Number);
         var date=new Date();
-        var start=date.getFullYear()+'-'+date.getMonth()+'-01';
-        var end=date.getFullYear()+'-'+date.getMonth()+'-31';
+        var start=date.getFullYear()+'-'+(date.getMonth()+1)+'-01';
+        var end=date.getFullYear()+'-'+(date.getMonth()+1)+'-31';
         findCostById(user.Id_Number,res,start,end,costs =>{
             res.render('profile', {
                 Fullname:user.Fullname,
